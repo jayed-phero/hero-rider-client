@@ -61,10 +61,14 @@ const Navbar = () => {
                                             className='px-5 py-2 bg-blue-500 rounded-full  hover:bg-blue-400 transition-all duration-500 ease-in-out'
                                         >Logout</Link>
                                         :
-                                        <Link
-                                            to='/registration'
-                                            className='px-5 py-2 bg-blue-500 rounded-full  hover:bg-blue-400 transition-all duration-500 ease-in-out'
-                                        >Sign In</Link>
+                                        <Link to='/registration'
+                                            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                            <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+
+                                            <span className="mx-2">
+                                                Sign Up
+                                            </span>
+                                        </Link>
                                 }
                             </div>
                         </div>
