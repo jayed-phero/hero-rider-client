@@ -15,6 +15,7 @@ const Navbar = () => {
                 navigate('/')
             })
     }
+    console.log(user)
     return (
         <div>
             <nav class="relative bg-white shadow dark:bg-gray-800">
@@ -49,7 +50,7 @@ const Navbar = () => {
                             <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Join Slack</a>
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse Topics</a>
-                                <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Random Item</a>
+                                <Link to='/dashboard' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</Link>
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Experts</a>
                             </div>
 
@@ -58,10 +59,16 @@ const Navbar = () => {
                                     user?.uid ?
                                         <Link
                                             onClick={handleLogout}
-                                            className='px-5 py-2 bg-blue-500 rounded-full  hover:bg-blue-400 transition-all duration-500 ease-in-out'
-                                        >Logout</Link>
+                                            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+
+                                            <span className="mx-2">
+                                                Logout
+                                            </span>
+                                            <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+                                        </Link>
                                         :
                                         <Link to='/registration'
+                                            onClick={() => setOpen(!open)}
                                             className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                             <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
 

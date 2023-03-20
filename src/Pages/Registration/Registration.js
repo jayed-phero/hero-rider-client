@@ -5,15 +5,20 @@ const Registration = () => {
     return (
         <div>
             <section className="bg-white dark:bg-gray-900 min-h-screen  flex items-center justify-center px-5">
-                <div className="max-w-6xl flex flex-col items-center rounded-3xl px-5 py-12 mx-auto text-center bg-gray-100">
+                <div className="max-w-6xl flex flex-col items-center rounded-3xl px-5 py-12 mx-auto text-center bg-gray-100 my-5 md:my-0">
                     <h2 className="text-2xl font-bold tracking-tight text-gray-800 xl:text-3xl dark:text-white">
                         Try something really different right now.
                     </h2>
 
-                    <p className="block max-w-4xl mt-4 text-gray-500 dark:text-gray-300">
+                    <p className="md:block hidden max-w-4xl mt-4 text-gray-500 dark:text-gray-300">
                         Lorem, ipsum dolor sit amet consectetur
                         adipisicing elit. Esse iure tenetur commodi ipsam error voluptate magni. Adipisci repudiandae ullam commodi
                         iusto reprehenderit suscipit facere voluptatem, eaque maiores minima. Neque, officiis.
+                    </p>
+
+                    <p className="md:hidden max-w-4xl mt-4 text-gray-500 dark:text-gray-300">
+                        Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Esse iure tenetur commodi ipsam error voluptate magni.
                     </p>
 
                     <div className="mt-6">

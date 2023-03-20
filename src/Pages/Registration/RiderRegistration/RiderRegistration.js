@@ -12,11 +12,13 @@ const RiderRegistration = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const navigate = useNavigate()
+    const [preview, setPreview] = useState('')
+    const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
 
     const onSubmit = data => {
         console.log(data)
         const email = data.email
-        const username = data.username
+        const username = data.name
         const password = data.password
         const confirmPassword = data.confirmPassword
         // if (!password === confirmPassword) {
@@ -66,8 +68,10 @@ const RiderRegistration = () => {
                                             carInformation,
                                             drivingLicence: drivingLicenceLink,
                                             nid: nidLink,
-                                            vehicleType
+                                            vehicleType,
+                                            role: "rider"
                                         }
+                                        console.log(currentUserData)
                                         axios.put(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, currentUserData)
                                             .then(res => {
                                                 console.log(res.data)
@@ -80,7 +84,7 @@ const RiderRegistration = () => {
                                             .catch(err => {
                                                 console.log(err)
                                                 setLoading(false)
-                                                toast.error("Please Fill All the Field")
+                                                toast.error("Something was wrong try again")
                                             })
 
                                     })
@@ -88,7 +92,7 @@ const RiderRegistration = () => {
                                         console.log(err)
                                         setError(err.message)
                                         setLoading(false)
-                                        toast.error("User Already Exists")
+                                        toast.error(err?.message)
                                     })
 
 
@@ -100,10 +104,16 @@ const RiderRegistration = () => {
 
     }
 
+    const handleImageChange = image => {
+        console.log(image)
+        setPreview(window.URL.createObjectURL(image))
+        setUploadButtonText(image.name)
+    }
+
     return (
         <div>
             <section class="max-w-4xl p-6 mx-auto bg-green-50  rounded-md shadow-md dark:bg-gray-800 my-11">
-                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white text-center pb-7 ">Rider Sign Up</h2>
+                <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white text-center mb-7 px-5 py-3 bg-blue-500 w-64 mx-auto text-white">Rider Sign Up</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className='flex items-start flex-col lg:flex-row gap-7 '>
                     <div className='max-w-md'>
