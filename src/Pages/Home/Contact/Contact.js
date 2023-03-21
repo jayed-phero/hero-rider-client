@@ -63,7 +63,7 @@ const Contact = () => {
 
                             <h2 class="mt-4 text-base font-medium text-gray-800 dark:text-white">Call us</h2>
                             <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Mon-Fri from 8am to 5pm.</p>
-                            <p class="mt-2 text-sm text-blue-500 dark:text-blue-400">+ 8801954057920</p>
+                            <p class="mt-2 text-sm text-blue-500 dark:text-blue-400">++(880)1954057920</p>
                         </div>
                     </div>
                 </div>
