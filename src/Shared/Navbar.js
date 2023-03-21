@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
+import useAdmin from '../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthProvider)
+    const [isAdmin] = useAdmin(user?.email)
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
 
@@ -51,31 +53,53 @@ const Navbar = () => {
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Join Slack</a>
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse Topics</a>
                                 <Link to='/dashboard' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</Link>
-                                <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Experts</a>
+                                <a onClick={handleLogout} href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
                             </div>
 
                             <div class="flex items-center mt-4 lg:mt-0">
                                 {
                                     user?.uid ?
-                                        <Link
-                                            onClick={handleLogout}
-                                            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                        <>
+                                            {
+                                                isAdmin === true ?
+                                                    <Link
+                                                        to='/dashboard'
+                                                        className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                        Dashboard
+                                                    </Link>
+                                                    :
+                                                    <Link
+                                                        onClick={handleLogout}
+                                                        className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
 
-                                            <span className="mx-2">
-                                                Logout
-                                            </span>
-                                            <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
-                                        </Link>
+                                                        <span className="mx-2">
+                                                            Logout
+                                                        </span>
+                                                        <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+                                                    </Link>
+                                            }
+                                        </>
                                         :
-                                        <Link to='/registration'
-                                            onClick={() => setOpen(!open)}
-                                            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                                            <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+                                        <div className='flex items-center '>
+                                            <Link to='/signin'
+                                                onClick={() => setOpen(!open)}
+                                                className="inline-flex font-semibold items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text- gray-700 hover:text-white transition-colors duration-300 hover:bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 border-2 border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                <i class="fa-solid fa-right-to-bracket mx-2 hover:text-white text-gray-700"></i>
 
-                                            <span className="mx-2">
-                                                Sign Up
-                                            </span>
-                                        </Link>
+                                                <span className="mx-2">
+                                                    Sign In
+                                                </span>
+                                            </Link>
+                                            <Link to='/registration'
+                                                onClick={() => setOpen(!open)}
+                                                className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+
+                                                <span className="mx-2">
+                                                    Sign Up
+                                                </span>
+                                            </Link>
+                                        </div>
                                 }
                             </div>
                         </div>

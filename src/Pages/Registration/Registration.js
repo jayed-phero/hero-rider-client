@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../../Shared/ScrollToTop/ScrollToTop';
 
 const Registration = () => {
     return (
         <div>
+            <ScrollToTop/>
             <section className="bg-white dark:bg-gray-900 min-h-screen  flex items-center justify-center px-5">
                 <div className="max-w-6xl flex flex-col items-center rounded-3xl px-5 py-12 mx-auto text-center bg-gray-100 my-5 md:my-0">
                     <h2 className="text-2xl font-bold tracking-tight text-gray-800 xl:text-3xl dark:text-white">

@@ -8,6 +8,7 @@ import LearnerRegistration from "../Pages/Registration/LearnerRegistration/Learn
 import Registration from "../Pages/Registration/Registration";
 import RiderRegistration from "../Pages/Registration/RiderRegistration/RiderRegistration";
 import Signin from "../Pages/Registration/Signin";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout />,
+        element: <AdminRoute><DashboardLayout /></AdminRoute> ,
         children: [
             {
                 path: '/dashboard',

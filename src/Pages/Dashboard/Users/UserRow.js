@@ -1,23 +1,23 @@
 import React from 'react';
 
 const UserRow = ({ data }) => {
-    const { role, personalPhoto, name, email } = data
+    const { role, personalPhoto, name, email, _id } = data
     return (
         <tr>
             <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                 <div class="inline-flex items-center gap-x-3">
                     <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
 
-                    <span>#3066</span>
+                    <span>#{_id.slice(15, 25)}</span>
                 </div>
             </td>
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 6, 2022</td>
             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                 {
                     role === "rider" ?
-                        <p class="px-3 py-1 text-sm text-blue-500 rounded-full dark:bg-gray-800 bg-blue-100/60 flex items-center justify-center">Rider</p>
+                        <p class="px-3 py-1 text-sm text-blue-500 rounded-full dark:bg-gray-800 bg-blue-100/60 flex items-center justify-center">{role}</p>
                         :
-                        <p class="px-3 py-1 text-sm text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 flex items-center justify-center">Learner</p>
+                        <p class="px-3 py-1 text-sm text-emerald-500 rounded-full dark:bg-gray-800 bg-emerald-100/60 flex items-center justify-center">{role}</p>
                 }
             </td>
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">

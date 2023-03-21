@@ -1,18 +1,66 @@
-import React, { useContext } from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
+import ScrollToTop from '../../Shared/ScrollToTop/ScrollToTop';
+import SmallSpinner from '../../Shared/Spinner/SmallSpinner';
 
 const Signin = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const { user, createUser, updateUserProfile } = useContext(AuthProvider)
+    const { user, signInUser } = useContext(AuthProvider)
+    const [authError, setAuthError] = useState(' ')
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+
+    const onSubmit = (e) => {
+        console.log(e)
+        const email = e.email;
+        const password = e.password
+
+
+        setLoading(true)
+        signInUser(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+
+                axios.put(`${process.env.REACT_APP_API_URL}/users/${user?.email}`)
+                    .then(res => {
+                        console.log(res)
+                        if (res.data.status === "success") {
+                            const accessToken = res?.data?.token
+                            localStorage.setItem("cpToken", accessToken);
+                            toast.success(`Welcome back ${user?.displayName}`)
+                            setLoading(false)
+                        } else {
+                            setLoading(false)
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        toast.error("User dosn't exists !")
+                        setLoading(false)
+                    })
+            })
+            .catch(err => {
+                console.log(err)
+                setError(err)
+                setLoading(false)
+            })
+
+    }
     return (
         <div>
-            <section class="bg-white dark:bg-gray-900">
-                <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-                    <form class="w-full max-w-md">
+            <section class=" ">
+                <ScrollToTop />
+                <div class="max-w-3xl my-11 shadow-lg bg-gray-100 flex items-center justify-center min-h-screen px-6 mx-auto">
+                    <form onSubmit={handleSubmit(onSubmit)} class="w-full max-w-md">
                         <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
 
                         <h1 class="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">sign In</h1>
+                        <p className='text-red-500 py-3 text-center'>{error?.message}</p>
 
                         <div class="relative flex items-center mt-8">
                             <span class="absolute">
@@ -21,7 +69,9 @@ const Signin = () => {
                                 </svg>
                             </span>
 
-                            <input type="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
+                            <input type="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"
+                                {...register("email")}
+                            />
                         </div>
 
                         <div class="relative flex items-center mt-4">
@@ -31,12 +81,19 @@ const Signin = () => {
                                 </svg>
                             </span>
 
-                            <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+                            <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password"
+                                {...register("password")}
+                            />
                         </div>
 
                         <div class="mt-6">
-                            <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                                Sign in
+                            <button type='submit' class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                {
+                                    loading ?
+                                        <SmallSpinner />
+                                        :
+                                        "Sign In"
+                                }
                             </button>
 
                             <p class="mt-4 text-center text-gray-600 dark:text-gray-400">or sign in with</p>
@@ -53,9 +110,9 @@ const Signin = () => {
                             </a>
 
                             <div class="mt-6 text-center ">
-                                <a href="#" class="text-sm text-blue-500 hover:underline dark:text-blue-400">
+                                <Link to='/registration' class="text-sm text-blue-500 hover:underline dark:text-blue-400">
                                     Don’t have an account yet? Sign up
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </form>

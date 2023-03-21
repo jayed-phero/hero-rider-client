@@ -1,11 +1,47 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import UserRow from './UserRow';
 
 const AllUsers = () => {
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(10);
+    const [size, setSize] = useState(1);
+    const [users, setUsers] = useState([])
+
+    console.log(users)
+    // useEffect(() => {
+    //     const url = `http://localhost:5000/products?page=${page}&size=${size}`;
+    //     console.log(page, size);
+    //     fetch(url)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setCount(data.count);
+    //         })
+    // }, [page, size])
+
+    useEffect(() => {
+        getUsers()
+    }, [page, size])
+
+    const getUsers = () => {
+        axios.get(`${process.env.REACT_APP_API_URL}/alluser?page=${page}&size=${size}`)
+            .then(res => {
+                console.log(res)
+                setCount(res.data.count);
+                setUsers(res.data.users);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+
+    const pages = Math.ceil(count / size);
+
     const { data: usersData = [], isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: () => fetch(`${process.env.REACT_APP_API_URL}/users`)
+        queryKey: ['alluser'],
+        queryFn: () => fetch(`${process.env.REACT_APP_API_URL}/alluser'`)
             .then(res => res.json())
     })
 
@@ -114,7 +150,7 @@ const AllUsers = () => {
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
-                                            usersData.map(data =>
+                                            users?.map(data =>
                                                 <UserRow
                                                     key={data._id}
                                                     data={data}
@@ -128,32 +164,66 @@ const AllUsers = () => {
                     </div>
                 </div>
 
-                <div class="mt-6 sm:flex sm:items-center sm:justify-between ">
-                    <div class="text-sm text-gray-500 dark:text-gray-400">
-                        Page <span class="font-medium text-gray-700 dark:text-gray-100">1 of 10</span>
-                    </div>
 
-                    <div class="flex items-center mt-4 gap-x-4 sm:mt-0">
-                        <a href="#" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                            </svg>
-
-                            <span>
-                                previous
-                            </span>
-                        </a>
-
-                        <a href="#" class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md sm:w-auto gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                            <span>
-                                Next
-                            </span>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                <div className='mt-7'>
+                    <div class="flex items-center justify-center">
+                        <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                         </a>
+
+                        <div className='flex items-center gap-3'>
+
+                            {
+                                [...Array(pages).keys()].map(number => <button
+                                    key={number}
+                                    className={page === number ? 'flex items-center justify-center px-4 py-2 mx-1 text-white transition-colors duration-300 transform bg-blue-500 rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200' : 'flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 border-2'}
+                                    onClick={() => setPage(number)}
+                                >
+                                    {number + 1}
+                                </button>)
+                            }
+
+                            {/* <select className='border px-3 py-2 rounded outline-none' onChange={event => setSize(event.target.value)}>
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select> */}
+                        </div>
+
+
+
+                        <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
+                </div>
+                <div class="flex">
+                    <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    {
+                        [...Array(pages).keys()].map(number => <button
+                            key={number}
+                            className='px-4 py-2 border-2 border-gray-200 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'
+                        >
+                            {number + 1}
+                        </button>)
+                    }
+
+
+
+                    <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
                 </div>
             </section>
         </div>

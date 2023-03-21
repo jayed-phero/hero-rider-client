@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { getImageTwoUrl, getImageUrl, getPersonalPhotoURL } from '../../../api/ImageHosting';
 import { AuthProvider } from '../../../Context/AuthContext';
+import ScrollToTop from '../../../Shared/ScrollToTop/ScrollToTop';
+import SmallSpinner from '../../../Shared/Spinner/SmallSpinner';
 
 const LearnerRegistration = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -16,7 +18,7 @@ const LearnerRegistration = () => {
     const onSubmit = data => {
         console.log(data)
         const email = data.email
-        const username = data.username
+        const username = data.name
         const password = data.password
         const confirmPassword = data.confirmPassword
         // if (!password === confirmPassword) {
@@ -25,15 +27,9 @@ const LearnerRegistration = () => {
         const personalPhoto = data.personalPhoto[0]
         const nid = data.nid[0]
         const address = data.address
-        const area = data.area
         const phone = data.phone
         const age = data.age
         const vehicleType = data.vehicleType
-        const carInformation = {
-            name: data.carName,
-            model: data.model,
-            namePalate: data.namePalate
-        }
 
         setLoading(true)
         getPersonalPhotoURL(personalPhoto)
@@ -57,8 +53,6 @@ const LearnerRegistration = () => {
                                     phone: phone,
                                     age: age,
                                     address,
-                                    area,
-                                    carInformation,
                                     nid: nidLink,
                                     vehicleType,
                                     role: "learner"
@@ -95,6 +89,7 @@ const LearnerRegistration = () => {
 
     return (
         <div>
+            <ScrollToTop />
             <section class="max-w-4xl p-6 mx-auto bg-green-50 rounded-3xl lg:rounded-none rounded-md shadow-md dark:bg-gray-800 my-11">
                 <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white text-center mb-7 px-5 py-3 bg-blue-500 w-64 mx-auto text-white">Learner Sign Up</h2>
 
@@ -187,11 +182,16 @@ const LearnerRegistration = () => {
 
                         <button
                             type='submit'
-                            className="md:mt-5 inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                            className="md:mt-5 inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-44 h-11 flex items-center justify-center sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                             <i class="fa-regular fa-closed-captioning mx-2 text-white"></i>
 
                             <span className="mx-2">
-                                Submit
+                                {
+                                    loading ?
+                                        <SmallSpinner />
+                                        :
+                                        "Sign Up"
+                                }
                             </span>
                         </button>
                     </div>
