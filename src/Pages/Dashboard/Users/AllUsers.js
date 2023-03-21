@@ -8,6 +8,8 @@ const AllUsers = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [userInfo, setUserInfo] = useState([])
+    const [userBasedRole, setUserBasedRole] = useState(null)
+    console.log(userBasedRole)
 
 
     useEffect(() => {
@@ -25,7 +27,67 @@ const AllUsers = () => {
 
     const pages = Math.ceil(count / size);
 
-   
+    // data.price && !data.paid && <Button></Button>
+
+    const roleContain = [
+        {
+            name: "View All",
+            roleName: "viewall"
+        },
+        {
+            name: "Rider",
+            roleName: "rider"
+        },
+        {
+            name: "Learner",
+            roleName: "learner"
+        }
+    ]
+
+    let content;
+
+    if (userInfo.length) {
+        content = userInfo?.map((user, i) =>
+            <UserRow
+                key={i}
+                user={user}
+            />
+        )
+    }
+    if (userInfo.length && userBasedRole === "rider") {
+        content = userInfo
+            .filter((userData) => {
+                return userBasedRole.includes(userData.role)
+            })
+            .map((user, i) => {
+                <UserRow
+                    key={i}
+                    user={user}
+                />
+            })
+
+    }
+    console.log(content)
+
+    // if (blogs.length && (filters.type || category.length)) {
+    //     content = blogs
+    //         .filter((blog) => {
+    //             if (category.length) {
+    //                 return category.includes(blog.category)
+    //             }
+    //             return blog
+    //         })
+    //         .filter(blog => {
+    //             if (type.length) {
+    //                 return type.includes(blog.type)
+    //             }
+    //             return blog
+    //         })
+    //         .map((blog, i) => <BlogRow key={i} blog={blog} />
+    //         )
+    // }
+
+
     return (
         <div>
             <section class="container px-4 mx-auto">
@@ -68,17 +130,13 @@ const AllUsers = () => {
 
                 <div class="mt-6 md:flex md:items-center md:justify-between">
                     <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-                        <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm dark:bg-gray-800 dark:text-gray-300">
-                            View all
-                        </button>
-
-                        <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-                            Rider
-                        </button>
-
-                        <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-                            Learner
-                        </button>
+                        {
+                            roleContain.map((data, i) =>
+                                <button onClick={() => setUserBasedRole(data.roleName)} key={i} class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200  sm:text-sm dark:bg-gray-800 dark:text-gray-300">
+                                    {data.name}
+                                </button>
+                            )
+                        }
                     </div>
 
                     <div class="relative flex items-center mt-4 md:mt-0">

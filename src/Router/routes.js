@@ -8,6 +8,7 @@ import Contact from "../Pages/Home/Contact/Contact";
 import Courses from "../Pages/Home/Courses/Courses";
 import Home from "../Pages/Home/Home/Home";
 import EnrollNow from "../Pages/Payment/EnrollNow";
+import Payment from "../Pages/Payment/Payment";
 import LearnerRegistration from "../Pages/Registration/LearnerRegistration/LearnerRegistration";
 import Registration from "../Pages/Registration/Registration";
 import RiderRegistration from "../Pages/Registration/RiderRegistration/RiderRegistration";
@@ -51,6 +52,11 @@ export const router = createBrowserRouter([
             {
                 path: 'enrollnow',
                 element: <PrivateRoutes><EnrollNow /></PrivateRoutes>
+            },
+            {
+                path: '/payment/:id',
+                element: <PrivateRoutes><Payment /></PrivateRoutes>,
+                loader: ({params}) => fetch(`${process.env.REACT_APP_API_URL}/enrolling/${params.id}`)
             },
             {
                 path: '/contact',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CourseRow = ({ course }) => {
-    const { image, price, desc, title } = course
+    const { image, price, desc, title, _id } = course
     return (
         <div>
             <div class="flex max-w-md overflow-hidden flex-col md:flex-row  rounded-lg shadow-lg bg-gray-800">
@@ -34,9 +34,9 @@ const CourseRow = ({ course }) => {
 
                     <div class="flex justify-between mt-3 item-center">
                         <h1 class="text-lg font-bold text-blue-500 md:text-xl">{price}$</h1>
-                        <Link 
-                        to='/enrollnow'
-                        class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform  rounded bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Enroll Now</Link>
+                        <Link
+                            to={`/payment/${_id}`}
+                            class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform  rounded bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Enroll Now</Link>
                     </div>
                 </div>
             </div>
