@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserRow = ({ data }) => {
-    const { role, personalPhoto, name, email, _id } = data
+    const { role, personalPhoto, name, email, _id, age } = data
     return (
         <tr>
             <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
@@ -11,7 +11,7 @@ const UserRow = ({ data }) => {
                     <span>#{_id.slice(15, 25)}</span>
                 </div>
             </td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 6, 2022</td>
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{age}</td>
             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                 {
                     role === "rider" ?

@@ -11,6 +11,7 @@ import SmallSpinner from '../../../Shared/Spinner/SmallSpinner';
 const LearnerRegistration = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { user, createUser, updateUserProfile } = useContext(AuthProvider)
+    console.log(user)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const navigate = useNavigate()
@@ -18,7 +19,7 @@ const LearnerRegistration = () => {
     const onSubmit = data => {
         console.log(data)
         const email = data.email
-        const username = data.name
+        const name = data.name
         const password = data.password
         const confirmPassword = data.confirmPassword
         // if (!password === confirmPassword) {
@@ -45,11 +46,11 @@ const LearnerRegistration = () => {
                             .then(result => {
                                 const user = result.user
                                 console.log(user)
-                                updateUserProfile(username, photoLink)
+                                updateUserProfile(name, photoLink)
                                 const currentUserData = {
                                     personalPhoto: photoLink,
                                     email: user?.email,
-                                    name: user?.displayName,
+                                    name: name,
                                     phone: phone,
                                     age: age,
                                     address,
@@ -111,12 +112,21 @@ const LearnerRegistration = () => {
                                     />
                                 </div>
                                 <div className='flex items-center gap-5 mt-4 flex-col md:flex-row w-full'>
-                                    <div className='md:w-1/3 w-full'>
+                                <div className='md:w-1/3 w-full'>
                                         <label class="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Age</label>
-                                        <input id="emailAddress" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        <select id="emailAddress" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("age")}
-                                        />
-                                    </div>
+                                        >
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                        </select>
+                                    </div>f
                                     <div className='mt-4 md:mt-0 md:flex-1 w-full'>
                                         <label class="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Phone</label>
                                         <input type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"

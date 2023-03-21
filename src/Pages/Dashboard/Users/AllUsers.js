@@ -5,47 +5,27 @@ import UserRow from './UserRow';
 
 const AllUsers = () => {
     const [count, setCount] = useState(0);
-    const [page, setPage] = useState(10);
-    const [size, setSize] = useState(1);
-    const [users, setUsers] = useState([])
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [userInfo, setUserInfo] = useState([])
 
-    console.log(users)
-    // useEffect(() => {
-    //     const url = `http://localhost:5000/products?page=${page}&size=${size}`;
-    //     console.log(page, size);
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setCount(data.count);
-    //         })
-    // }, [page, size])
 
     useEffect(() => {
-        getUsers()
+        getAllUser()
     }, [page, size])
 
-    const getUsers = () => {
+    const getAllUser = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/alluser?page=${page}&size=${size}`)
             .then(res => {
                 console.log(res)
                 setCount(res.data.count);
-                setUsers(res.data.users);
-            })
-            .catch(err => {
-                console.log(err)
+                setUserInfo(res.data.userData);
             })
     }
 
-
     const pages = Math.ceil(count / size);
 
-    const { data: usersData = [], isLoading } = useQuery({
-        queryKey: ['alluser'],
-        queryFn: () => fetch(`${process.env.REACT_APP_API_URL}/alluser'`)
-            .then(res => res.json())
-    })
-
-    console.log(usersData)
+   
     return (
         <div>
             <section class="container px-4 mx-auto">
@@ -132,7 +112,7 @@ const AllUsers = () => {
                                             </th>
 
                                             <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                Status
+                                                Age
                                             </th>
 
                                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -150,7 +130,7 @@ const AllUsers = () => {
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
-                                            users?.map(data =>
+                                            userInfo?.map(data =>
                                                 <UserRow
                                                     key={data._id}
                                                     data={data}
@@ -185,45 +165,22 @@ const AllUsers = () => {
                                 </button>)
                             }
 
-                            {/* <select className='border px-3 py-2 rounded outline-none' onChange={event => setSize(event.target.value)}>
+                            <select className='border px-3 py-2 rounded outline-none' onChange={event => setSize(event.target.value)}>
                                 <option value="5">5</option>
                                 <option value="10" selected>10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
-                            </select> */}
+                            </select>
                         </div>
 
 
 
-                        <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+                        <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
                         </a>
                     </div>
-                </div>
-                <div class="flex">
-                    <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    {
-                        [...Array(pages).keys()].map(number => <button
-                            key={number}
-                            className='px-4 py-2 border-2 border-gray-200 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'
-                        >
-                            {number + 1}
-                        </button>)
-                    }
-
-
-
-                    <a href="#" class="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
                 </div>
             </section>
         </div>
