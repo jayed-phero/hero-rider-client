@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import ScrollToTop from '../../../Shared/ScrollToTop/ScrollToTop';
 import UserRow from './UserRow';
 
 const AllUsers = () => {
@@ -90,6 +91,7 @@ const AllUsers = () => {
 
     return (
         <div>
+            <ScrollToTop/>
             <section class="container px-4 mx-auto">
                 <div class="sm:flex sm:items-center sm:justify-between">
                     <div>

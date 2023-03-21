@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import ScrollToTop from '../../../Shared/ScrollToTop/ScrollToTop';
 import CourseRow from './CourseRow';
 
 const Courses = () => {
@@ -10,6 +11,7 @@ const Courses = () => {
     })
     return (
         <div>
+            <ScrollToTop/>
             <section class=" dark:bg-gray-900">
                 <div class="max-w-6xl px-6 py-10 mx-auto bg-gray-100 my-7 rounded-3xl">
                     <div class="text-center">

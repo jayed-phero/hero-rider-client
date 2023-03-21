@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
@@ -9,6 +9,20 @@ const Navbar = () => {
     const [isAdmin] = useAdmin(user?.email)
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
+    const [nav, setNav] = useState(false)
+
+    useEffect(() => {
+        function activateNav() {
+            let scrollPosition = window.pageYOffset
+            if (scrollPosition > 200) {
+                setNav(true)
+            }
+            else if (scrollPosition < 10) {
+                setNav(false)
+            }
+        }
+        window.addEventListener("scroll", activateNav)
+    }, [])
 
     const handleLogout = () => {
         logout()
@@ -19,7 +33,7 @@ const Navbar = () => {
     }
     console.log(user)
     return (
-        <div>
+        <div className={`w-full ${nav && 'fixed w-full top-0 transition-all deration-500'}`}>
             <nav class="relative bg-white shadow dark:bg-gray-800">
                 <div class="max-w-6xl xl:px-0 px-6 py-5 mx-auto">
                     <div class="lg:flex lg:items-center lg:justify-between">
@@ -52,8 +66,19 @@ const Navbar = () => {
                             <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                                 <Link to='/' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Home</Link>
                                 <Link onClick={() => setOpen(!open)} to='/courses' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Courses</Link>
-                                <Link onClick={() => setOpen(!open)} to='/profile' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
-                                <a  onClick={handleLogout} href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                                <a onClick={() => setOpen(!open)} href='#services' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Services</a>
+                                <Link onClick={() => setOpen(!open)} to='/contact' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link>
+                                {
+                                    user?.uid ?
+                                        <>
+                                            <Link onClick={() => setOpen(!open)} to='/profile' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
+                                            <a onClick={handleLogout} href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                                        </>
+
+                                        :
+                                        undefined
+                                }
+
                             </div>
 
                             <div class="flex items-center mt-4 lg:mt-0">
@@ -63,7 +88,7 @@ const Navbar = () => {
                                             {
                                                 isAdmin === true ?
                                                     <Link
-                                                    onClick={() => setOpen(!open)}
+                                                        onClick={() => setOpen(!open)}
                                                         to='/dashboard'
                                                         className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                                         Dashboard

@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollToTop from '../../Shared/ScrollToTop/ScrollToTop';
 import RowOfService from './RowOfService';
 
 const Services = () => {
@@ -36,6 +37,7 @@ const Services = () => {
     ]
     return (
         <div>
+            <ScrollToTop />
             <section id='services' class="bg-white dark:bg-gray-900">
                 <div class="max-w-6xl px-6 py-10 mx-auto">
                     <div class="flex items-center justify-between">
