@@ -4,6 +4,7 @@ import Main from "../Layout/Main";
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
 import UserProfile from "../Pages/Dashboard/UserProfile/UserProfile";
 import AllUsers from "../Pages/Dashboard/Users/AllUsers";
+import Contact from "../Pages/Home/Contact/Contact";
 import Courses from "../Pages/Home/Courses/Courses";
 import Home from "../Pages/Home/Home/Home";
 import EnrollNow from "../Pages/Payment/EnrollNow";
@@ -49,7 +50,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'enrollnow',
-                element: <PrivateRoutes><EnrollNow /></PrivateRoutes> 
+                element: <PrivateRoutes><EnrollNow /></PrivateRoutes>
+            },
+            {
+                path: '/contact',
+                element: <Contact />
             }
         ]
     },
