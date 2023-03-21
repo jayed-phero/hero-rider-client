@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
 import ScrollToTop from '../../Shared/ScrollToTop/ScrollToTop';
 import SmallSpinner from '../../Shared/Spinner/SmallSpinner';
@@ -13,6 +13,11 @@ const Signin = () => {
     const [authError, setAuthError] = useState(' ')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const from = location.state?.from?.pathname || '/'
 
     const onSubmit = (e) => {
         console.log(e)
@@ -25,13 +30,13 @@ const Signin = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-
                 axios.put(`${process.env.REACT_APP_API_URL}/users/${user?.email}`)
                     .then(res => {
                         console.log(res)
                         if (res.data.status === "success") {
                             const accessToken = res?.data?.token
-                            localStorage.setItem("cpToken", accessToken);
+                            localStorage.setItem("heroToken", accessToken);
+                            navigate(from, { replace: true })
                             toast.success(`Welcome back ${user?.displayName}`)
                             setLoading(false)
                         } else {

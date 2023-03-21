@@ -65,7 +65,7 @@ const LearnerRegistration = () => {
                                         if (res.data?.result?.acknowledged === true) {
                                             toast.success("User Created Successfully")
                                             setLoading(false)
-                                            navigate('/')
+                                            navigate('/courses')
                                         }
                                     })
                                     .catch(err => {

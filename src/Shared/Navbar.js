@@ -51,9 +51,9 @@ const Navbar = () => {
                         <div className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${open ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'}`}>
                             <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                                 <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Join Slack</a>
-                                <a href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse Topics</a>
-                                <Link to='/dashboard' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</Link>
-                                <a onClick={handleLogout} href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                                <Link onClick={() => setOpen(!open)} to='/courses' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Courses</Link>
+                                <Link onClick={() => setOpen(!open)} to='/profile' class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</Link>
+                                <a  onClick={handleLogout} href="#" class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
                             </div>
 
                             <div class="flex items-center mt-4 lg:mt-0">
@@ -63,24 +63,27 @@ const Navbar = () => {
                                             {
                                                 isAdmin === true ?
                                                     <Link
+                                                    onClick={() => setOpen(!open)}
                                                         to='/dashboard'
                                                         className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                                         Dashboard
                                                     </Link>
                                                     :
-                                                    <Link
-                                                        onClick={handleLogout}
-                                                        className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                                    <div onClick={() => setOpen(!open)}>
+                                                        <Link
+                                                            onClick={handleLogout}
+                                                            className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
 
-                                                        <span className="mx-2">
-                                                            Logout
-                                                        </span>
-                                                        <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
-                                                    </Link>
+                                                            <span className="mx-2">
+                                                                Logout
+                                                            </span>
+                                                            <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+                                                        </Link>
+                                                    </div>
                                             }
                                         </>
                                         :
-                                        <div className='flex items-center '>
+                                        <div className='flex items-center flex-col md:flex-row '>
                                             <Link to='/signin'
                                                 onClick={() => setOpen(!open)}
                                                 className="inline-flex font-semibold items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text- gray-700 hover:text-white transition-colors duration-300 hover:bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 border-2 border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">

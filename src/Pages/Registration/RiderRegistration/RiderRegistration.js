@@ -20,7 +20,7 @@ const RiderRegistration = () => {
     const onSubmit = data => {
         console.log(data)
         const email = data.email
-        const username = data.name
+        const name = data.name
         const password = data.password
         const confirmPassword = data.confirmPassword
         // if (!password === confirmPassword) {
@@ -58,11 +58,11 @@ const RiderRegistration = () => {
                                     .then(result => {
                                         const user = result.user
                                         console.log(user)
-                                        updateUserProfile(username, photoLink)
+                                        updateUserProfile(name, photoLink)
                                         const currentUserData = {
                                             personalPhoto: photoLink,
                                             email: user?.email,
-                                            name: user?.displayName,
+                                            name: name,
                                             phone: phone,
                                             age: age,
                                             address,
@@ -80,7 +80,7 @@ const RiderRegistration = () => {
                                                 if (res.data?.result?.acknowledged === true) {
                                                     toast.success("User Created Successfully")
                                                     setLoading(false)
-                                                    navigate('/')
+                                                    navigate('/profile')
                                                 }
                                             })
                                             .catch(err => {

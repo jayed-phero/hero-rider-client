@@ -32,9 +32,9 @@ const AllUsers = () => {
                 <div class="sm:flex sm:items-center sm:justify-between">
                     <div>
                         <div class="flex items-center gap-x-3">
-                            <h2 class="text-lg font-medium text-gray-800 dark:text-white">Customers</h2>
+                            <h2 class="text-lg font-medium text-gray-800 dark:text-white">Registered Users</h2>
 
-                            <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">240 vendors</span>
+                            <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{userInfo.length} users</span>
                         </div>
 
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">These companies have purchased in the last 12 months.</p>
@@ -73,11 +73,11 @@ const AllUsers = () => {
                         </button>
 
                         <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-                            Monitored
+                            Rider
                         </button>
 
                         <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
-                            Unmonitored
+                            Learner
                         </button>
                     </div>
 
@@ -111,18 +111,17 @@ const AllUsers = () => {
                                                 </button>
                                             </th>
 
-                                            <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 Age
                                             </th>
 
                                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                About
+                                                Role
                                             </th>
 
                                             <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Users</th>
 
-                                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">License use</th>
-
+                                            <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">NID & Licence</th>
                                             <th scope="col" class="relative py-3.5 px-4">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -166,6 +165,7 @@ const AllUsers = () => {
                             }
 
                             <select className='border px-3 py-2 rounded outline-none' onChange={event => setSize(event.target.value)}>
+                                <option value="3">3</option>
                                 <option value="5">5</option>
                                 <option value="10" selected>10</option>
                                 <option value="15">15</option>

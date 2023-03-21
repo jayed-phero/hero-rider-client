@@ -4,12 +4,9 @@ import app from '../firebase/firebase.config';
 
 export const AuthProvider = createContext()
 const auth = getAuth(app)
-const AuthContext = ({children}) => {
-    const [open, setOpenn] = useState(false)
-    const [isOpen, setOpen] = useState(false)
-    const [oopen, setOopen] = useState(false)
+const AuthContext = ({ children }) => {
 
-    const [user, setUser] = useState(" ")
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
     const createUser = (email, password) => {
@@ -32,7 +29,7 @@ const AuthContext = ({children}) => {
 
     const logout = () => {
         setLoading(true)
-        localStorage.removeItem('cpToken')
+        localStorage.removeItem('heroToken')
         return signOut(auth)
     }
 
@@ -45,23 +42,17 @@ const AuthContext = ({children}) => {
     }, [])
 
     const authInfo = {
-        open,
         createUser,
-        setOpenn,
-        isOpen,
-        setOpen,
         user,
         updateUserProfile,
         loading,
         logout,
         signInUser,
-        oopen,
-        setOopen,
     }
     return (
         <div>
             <AuthProvider.Provider value={authInfo}>
-                 {children}
+                {children}
             </AuthProvider.Provider>
         </div>
     );
