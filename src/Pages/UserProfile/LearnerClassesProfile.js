@@ -14,11 +14,11 @@ const LearnerClassesProfile = () => {
     console.log(paidCourses)
     return (
         <div className='max-w-6xl mx-auto px-5 xl:px-0 h-screen bg-gray-100 my-7 rounded-2xl'>
-            <h3 className='text-2xl md:text-4xl text-center pt-7 mb-5 text-blue-500 font-bold'>Enrelled Courses For you</h3>
+            <h3 className='text-2xl md:text-4xl text-center pt-7 mb-5 text-blue-500 font-bold'>Enrolled Courses For you</h3>
             {
                 paidCourses.length ?
                     <div>
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mt-7 md:px-7'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-7 md:px-7'>
                             {
                                 paidCourses.map(data =>
                                     <div class="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-xl dark:bg-gray-800">

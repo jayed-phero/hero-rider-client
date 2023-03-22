@@ -1,6 +1,7 @@
 import React from 'react';
 
-const PaymentInfoRow = () => {
+const PaymentInfoRow = ({info}) => {
+    const {title, name, price, transactionId, email }= info
     return (
         <tr>
             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
@@ -15,18 +16,18 @@ const PaymentInfoRow = () => {
                         </div>
 
                         <div>
-                            <h2 class="font-normal text-gray-800 dark:text-white ">Tech requirements.pdf</h2>
-                            <p class="text-xs font-normal text-gray-500 dark:text-gray-400">200 KB</p>
+                            <h2 class="font-normal text-gray-800 dark:text-white ">{title.slice(0,35)}</h2>
+                            <p class="text-xs font-normal text-gray-500 dark:text-gray-400">{price}$</p>
                         </div>
                     </div>
                 </div>
             </td>
-            <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                200 KB
+            <td class="px-12 py-4 text-sm font-normal text-blue-600 whitespace-nowrap">
+                {price}
             </td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 4, 2022</td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Jan 4, 2022</td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Lana Steiner</td>
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{email}</td>
+            <td class="px-4 py-4 text-sm text-green-500 dark:text-gray-300 whitespace-nowrap">{transactionId}</td>
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{name}</td>
             <td class="px-4 py-4 text-sm whitespace-nowrap">
                 <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

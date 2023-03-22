@@ -4,7 +4,7 @@ import useAdmin from '../../../hooks/useAdmin';
 
 const UserRow = ({ data }) => {
     const { user } = useContext(AuthProvider)
-    const { role, personalPhoto, name, email, _id, age, nid, drivingLicence } = data
+    const { role, personalPhoto, name, email, _id, age, nid, drivingLicence , phone} = data
     const [isAdmin] = useAdmin(user?.email)
     return (
         <tr>
@@ -57,9 +57,9 @@ const UserRow = ({ data }) => {
             </td>
             <td className="px-4 py-4 text-sm whitespace-nowrap">
                 <div className="flex items-center gap-x-6">
-                    <button className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                        Archive
-                    </button>
+                    <p className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
+                       {phone}
+                    </p>
 
                     <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
                         Download

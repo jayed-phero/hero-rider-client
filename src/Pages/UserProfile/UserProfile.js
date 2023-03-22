@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { AuthProvider } from '../../../Context/AuthContext';
-import ScrollToTop from '../../../Shared/ScrollToTop/ScrollToTop';
+import { AuthProvider } from '../../Context/AuthContext';
+import ScrollToTop from '../../Shared/ScrollToTop/ScrollToTop';
 
 const UserProfile = () => {
     const { user } = useContext(AuthProvider)
