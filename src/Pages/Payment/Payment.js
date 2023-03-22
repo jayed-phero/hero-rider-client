@@ -20,7 +20,7 @@ const Payment = () => {
                         <img src={courseData?.image} className='rounded-2xl w-full md:h-24 md:w-44' />
                         <div>
                             <h3>Name: <span className='text-indigo-500 font-semibold'>Expert</span></h3>
-                            <h3>Price: <span className='text-indigo-500 font-semibold'>{courseData?.price}</span></h3>
+                            <h3>Price: <span className='text-indigo-500 font-semibold'>{courseData?.price}$</span></h3>
                             <h3>Desc: <span className=' text-sm text-blue-400'>{courseData?.desc.slice(0, 55)}</span></h3>
                         </div>
                     </div>

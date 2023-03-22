@@ -36,7 +36,7 @@ const CourseRow = ({ course }) => {
                         <h1 class="text-lg font-bold text-blue-500 md:text-xl">{price}$</h1>
                         <Link
                             to={`/payment/${_id}`}
-                            class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform  rounded bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Enroll Now</Link>
+                            class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform flex items-center jusitfy-center rounded bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Enroll Now</Link>
                     </div>
                 </div>
             </div>

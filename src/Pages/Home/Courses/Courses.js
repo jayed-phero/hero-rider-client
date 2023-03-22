@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import ScrollToTop from '../../../Shared/ScrollToTop/ScrollToTop';
+import CouseCardSekleton from '../../../Shared/Skeleton/CouseCardSekleton';
 import CourseRow from './CourseRow';
 
 const Courses = () => {
@@ -11,7 +12,7 @@ const Courses = () => {
     })
     return (
         <div>
-            <ScrollToTop/>
+            <ScrollToTop />
             <section class=" dark:bg-gray-900">
                 <div class="max-w-6xl px-6 py-10 mx-auto bg-gray-100 my-7 rounded-3xl">
                     <div class="text-center">
@@ -24,12 +25,19 @@ const Courses = () => {
 
                     <div class="flex items-center gap-5 lg:gap-7 mt-8 flex-col lg:flex-row justify-center">
                         {
-                            courses.map((course, i) =>
-                                <CourseRow
-                                    key={i}
-                                    course={course}
-                                />
-                            )
+                            isLoading ?
+                                [1, 2].map((skel, i) =>
+                                    <CouseCardSekleton
+                                        key={i}
+                                    />
+                                )
+                                :
+                                courses.map((course, i) =>
+                                    <CourseRow
+                                        key={i}
+                                        course={course}
+                                    />
+                                )
                         }
                     </div>
                 </div>
