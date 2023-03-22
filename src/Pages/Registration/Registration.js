@@ -25,7 +25,7 @@ const Registration = () => {
 
                     <div className="mt-6">
                         <Link to='/learnersignup' className="inline-flex items-center justify-center w-full px-4 py-2.5 overflow-hidden text-sm text-white transition-colors duration-300 bg-gray-900 rounded-lg shadow sm:w-auto sm:mx-2 hover:bg-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                            <i class="fa-solid fa-graduation-cap text-xl text-white mx-2"></i>
+                            <i className="fa-solid fa-graduation-cap text-xl text-white mx-2"></i>
                             <span className="mx-2">
                                 Learner Sign Up
                             </span>
@@ -33,7 +33,7 @@ const Registration = () => {
 
                         <Link to='/ridersignup'
                             className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                            <i class="fa-solid fa-car mx-2 text-xl text-white"></i>
+                            <i className="fa-solid fa-car mx-2 text-xl text-white"></i>
 
                             <span className="mx-2">
                                 Rider Sign Up

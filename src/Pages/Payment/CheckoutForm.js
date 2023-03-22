@@ -156,7 +156,7 @@ const CheckoutForm = ({ courseData }) => {
                 <button
                     type="submit"
                     disabled={!stripe || !clientSecret || loading}
-                    class="w-full px-6 py-3 text-sm mt-7 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg md:w-1/2 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    className="w-full px-6 py-3 text-sm mt-7 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg md:w-1/2 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 >
                     {
                         loading ?

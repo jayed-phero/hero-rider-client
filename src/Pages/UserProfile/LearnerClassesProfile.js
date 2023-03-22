@@ -21,17 +21,17 @@ const LearnerClassesProfile = () => {
                         <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-7 md:px-7'>
                             {
                                 paidCourses.map(data =>
-                                    <div class="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-xl dark:bg-gray-800">
-                                        <div class="flex justify-center -mt-16 md:justify-end">
-                                            <img class="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src={data.image} />
+                                    <div className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                                        <div className="flex justify-center -mt-16 md:justify-end">
+                                            <img className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src={data.image} />
                                         </div>
 
-                                        <h2 class="mt-2 text-xl font-semibold text-gray-800 dark:text-white md:mt-0">{data.title}</h2>
+                                        <h2 className="mt-2 text-xl font-semibold text-gray-800 dark:text-white md:mt-0">{data.title}</h2>
 
-                                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-200">{data.desc} res deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
+                                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-200">{data.desc} res deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
 
-                                        <div class="flex justify-end mt-4">
-                                            <a href="#" class="text-lg font-medium text-blue-600 dark:text-blue-300" tabindex="0" role="link">Start Classes</a>
+                                        <div className="flex justify-end mt-4">
+                                            <a href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300" tabindex="0" role="link">Start Classes</a>
                                         </div>
                                     </div>
                                 )
@@ -44,7 +44,7 @@ const LearnerClassesProfile = () => {
                             <h3 className='text-xl font-semibold text-red-500'>You don't have any Enrolled Course</h3>
                             <Link to='/courses'
                                 className="inline-flex items-center justify-center w-full px-4 py-2.5 mt-4 overflow-hidden text-sm text-white transition-colors duration-300 bg-blue-600 rounded-lg shadow sm:w-auto sm:mx-2 sm:mt-0 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80 mt-5">
-                                <i class="fa-solid fa-right-to-bracket mx-2 text-white"></i>
+                                <i className="fa-solid fa-right-to-bracket mx-2 text-white"></i>
 
                                 <span className="mx-2">
                                     See Courses

@@ -38,13 +38,13 @@ const Services = () => {
     return (
         <div>
             <ScrollToTop />
-            <section id='services' class="bg-white dark:bg-gray-900">
-                <div class="max-w-6xl px-6 py-10 mx-auto">
-                    <div class="flex items-center justify-between">
-                        <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white pb-7">Our High Quality Offers </h1>
+            <section id='services' className="bg-white dark:bg-gray-900">
+                <div className="max-w-6xl px-6 py-10 mx-auto">
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white pb-7">Our High Quality Offers </h1>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
                         {
                             services.map((service, i) =>
                                 <RowOfService
