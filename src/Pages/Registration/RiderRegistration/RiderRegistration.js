@@ -138,18 +138,9 @@ const RiderRegistration = () => {
                                 <div className='flex items-center gap-5 mt-4 flex-col md:flex-row w-full'>
                                     <div className='md:w-1/3 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Age</label>
-                                        <select id="emailAddress" type="date" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        <select  type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("age")}
-                                        >
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                        </select>
+                                        />
                                     </div>
                                     <div className='mt-4 md:mt-0 md:flex-1 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Phone</label>

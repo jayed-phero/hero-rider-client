@@ -7,6 +7,7 @@ const Sidebar = () => {
     const { user, logout } = useContext(AuthProvider)
     const [isActive, setActive] = useState(false)
     const navigate = useNavigate()
+
     // Sidebar Responsive Handler
     const handleToggle = () => {
         setActive(!isActive)
@@ -23,7 +24,7 @@ const Sidebar = () => {
             <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden px-5'>
                 <div>
                     <div className='block cursor-pointer p-4 font-bold'>
-                        <a className="font-bold normal-case sm:text-4xl text-2xl lg:text-5xl logo">ComputerPlus</a>
+                        <a className="font-bold normal-case sm:text-4xl text-2xl lg:text-5xl logo">Hero Rider</a>
                     </div>
                 </div>
 

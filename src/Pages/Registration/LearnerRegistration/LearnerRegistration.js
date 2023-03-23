@@ -22,9 +22,6 @@ const LearnerRegistration = () => {
         const name = data.name
         const password = data.password
         const confirmPassword = data.confirmPassword
-        // if (!password === confirmPassword) {
-        //     return
-        // }
         const personalPhoto = data.personalPhoto[0]
         const nid = data.nid[0]
         const address = data.address
@@ -32,59 +29,67 @@ const LearnerRegistration = () => {
         const age = data.age
         const vehicleType = data.vehicleType
 
-        setLoading(true)
-        getPersonalPhotoURL(personalPhoto)
-            .then(photoLink => {
-                console.log(photoLink)
+        if (password === confirmPassword) {
+            setError("")
+            setLoading(true)
+            getPersonalPhotoURL(personalPhoto)
+                .then(photoLink => {
+                    console.log(photoLink)
 
-                getImageUrl(nid)
-                    .then(nidLink => {
-                        console.log(nidLink)
+                    getImageUrl(nid)
+                        .then(nidLink => {
+                            console.log(nidLink)
 
-                        // create user 
-                        createUser(email, password)
-                            .then(result => {
-                                const user = result.user
-                                console.log(user)
-                                updateUserProfile(name, photoLink)
-                                const currentUserData = {
-                                    personalPhoto: photoLink,
-                                    email: user?.email,
-                                    name: name,
-                                    phone: phone,
-                                    age: age,
-                                    address,
-                                    nid: nidLink,
-                                    vehicleType,
-                                    role: "learner"
-                                }
-                                console.log(currentUserData)
-                                axios.put(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, currentUserData)
-                                    .then(res => {
-                                        console.log(res.data)
-                                        if (res.data?.result?.acknowledged === true) {
-                                            toast.success("User Created Successfully")
+                            // create user 
+                            createUser(email, password)
+                                .then(result => {
+                                    const user = result.user
+                                    console.log(user)
+                                    updateUserProfile(name, photoLink)
+                                    const currentUserData = {
+                                        personalPhoto: photoLink,
+                                        email: user?.email,
+                                        name: name,
+                                        phone: phone,
+                                        age: age,
+                                        address,
+                                        nid: nidLink,
+                                        vehicleType,
+                                        role: "learner"
+                                    }
+                                    console.log(currentUserData)
+                                    axios.put(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, currentUserData)
+                                        .then(res => {
+                                            console.log(res.data)
+                                            if (res.data?.result?.acknowledged === true) {
+                                                toast.success("User Created Successfully")
+                                                setLoading(false)
+                                                navigate('/courses')
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.log(err)
                                             setLoading(false)
-                                            navigate('/courses')
-                                        }
-                                    })
-                                    .catch(err => {
-                                        console.log(err)
-                                        setLoading(false)
-                                        toast.error("Something was wrong try again")
-                                    })
+                                            toast.error("Something was wrong try again")
+                                        })
 
-                            })
-                            .catch(err => {
-                                console.log(err)
-                                setError(err.message)
-                                setLoading(false)
-                                toast.error(err?.message)
-                            })
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    setError(err.message)
+                                    setLoading(false)
+                                    toast.error(err?.message)
+                                })
+                        })
+                })
+
+        } else {
+            toast.error("Passwod does'n match")
+            setError("Passwod does'n match")
+            return
+        }
 
 
-                    })
-            })
 
     }
 
@@ -112,21 +117,12 @@ const LearnerRegistration = () => {
                                     />
                                 </div>
                                 <div className='flex items-center gap-5 mt-4 flex-col md:flex-row w-full'>
-                                <div className='md:w-1/3 w-full'>
+                                    <div className='md:w-1/3 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Age</label>
-                                        <select id="emailAddress" type="date" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        <input type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("age")}
-                                        >
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                        </select>
-                                    </div>f
+                                        />
+                                    </div>
                                     <div className='mt-4 md:mt-0 md:flex-1 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Phone</label>
                                         <input type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -163,7 +159,7 @@ const LearnerRegistration = () => {
                                         />
                                     </div>
                                 </div>
-
+                                <p className='text-red-500 text-md pt-2'>{error}</p>
                             </div>
                         </div>
                     </div>

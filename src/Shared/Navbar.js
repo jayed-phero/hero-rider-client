@@ -38,8 +38,8 @@ const Navbar = () => {
                 <div className="max-w-6xl xl:px-0 px-6 py-5 mx-auto">
                     <div className="lg:flex lg:items-center lg:justify-between">
                         <div className="flex items-center justify-between">
-                            <a href="#">
-                                <img className="w-auto h-6 sm:h-7" src="https://merakiui.com/images/full-logo.svg" alt="" />
+                            <a href="#" className='text-2xl md:text-3xl font-bold text-blue-600 cursor-pointer'>
+                                Hero Rider
                             </a>
 
                             <div className="flex lg:hidden">

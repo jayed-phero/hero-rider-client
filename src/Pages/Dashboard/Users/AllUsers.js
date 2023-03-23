@@ -7,21 +7,16 @@ import UserRow from './UserRow';
 
 const AllUsers = () => {
     const [count, setCount] = useState(0);
-    const [page, setPage] = useState(0);
-    const { register, handleSubmit } = useForm()
+    const [page, setPage] = useState(1);
     const [size, setSize] = useState(10);
     const [userInfo, setUserInfo] = useState([])
     const [from, setFrom] = useState("")
     const [till, setTill] = useState("")
     const [search, setSearch] = useState("")
+    const [items, setItems] = useState([]);
     const serarchRef = useRef()
 
 
-
-
-
-
-    console.log(from, till)
     // serarch function with useRef
     const handleSearch = () => {
         setSearch(serarchRef.current.value)
@@ -44,16 +39,35 @@ const AllUsers = () => {
 
     const pages = Math.ceil(count / size);
 
+    // next and prev of pagination
+
+    const handlePrevClick = () => {
+        setPage(page - 1);
+    };
+
+    const handleNextClick = () => {
+        setPage(page + 1);
+    };
 
 
-    const onSubmit = (event) => {
-        console.log(event)
-        const newFrom = event.fro
-        const newTill = event.til
-        console.log(newFrom, newTill)
-        setFrom(newFrom)
-        setTill(newTill)
-    }
+
+   
+
+    // useEffect(() => {
+    //     axios.get('/api/items').then((res) => {
+    //         setItems(res.data);
+    //     });
+    // }, []);
+
+    // const handleCheckBoxChange = (e, id) => {
+    //     const checked = e.target.checked;
+    //     axios.put(`/api/items/${id}`, { action: checked })
+    //         .then((res) => {
+    //             setItems((prevItems) =>
+    //                 prevItems.map((item) => (item._id === id ? res.data : item))
+    //             );
+    //         });
+    // };
 
     // user contect data  
     const roleContain = [
@@ -87,21 +101,19 @@ const AllUsers = () => {
                         <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">These companies have purchased in the last 12 months.</p>
                     </div>
 
-                    <from onSubmit={handleSubmit(onSubmit)} className="flex items-center mt-4 gap-x-3">
+                    <from className="flex items-center mt-4 justify-between gap-3">
                         <div className="flex items-center justify-between w-1/2 text-sm text-gray-700 transition-colors duration-200 bg-white rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
                             <input type="text" placeholder="From" className=" placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border-2 border-gray-200 bg-white px-2 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300 w-16"
-                                {...register("fro")}
-                                required
+                                onChange={(e) => setFrom(e.target.value)}
                             />
                             <h3>To</h3>
                             <input type="text" placeholder="Till" className="placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border-2 border-gray-200 bg-white px-2 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300 w-16"
-                                {...register("til")}
-                                required
+                                onChange={(e) => setTill(e.target.value)}
                             />
 
                         </div>
 
-                        <button type='submit' className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                        <button type='submit' className="flex items-center justify-center px-2 py-2 md:px-5 md:py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
                             Search by age
                         </button>
                     </from>
@@ -183,11 +195,11 @@ const AllUsers = () => {
 
                 <div className='mt-7'>
                     <div className="flex items-center justify-center">
-                        <a href="#" className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
+                        <button disabled={page === 0} onClick={handlePrevClick} href="#" className={`flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600 ${page === 0 ? 'cursor-not-allowed' : undefined}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
-                        </a>
+                        </button>
 
                         <div className='flex items-center gap-3'>
 
@@ -212,11 +224,11 @@ const AllUsers = () => {
 
 
 
-                        <a href="#" className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 ">
+                        <button disabled={page === pages} onClick={handleNextClick} href="#" className={`flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 ${page === pages ? 'cursor-not-allowed' : undefined} `}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </section>

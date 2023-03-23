@@ -11,63 +11,6 @@ const PaymentsInfo = () => {
 
     console.log(paymentsInfo)
 
-    //     Sample:
-    // vaxTrail([
-    //  { name: 'sunil', age: 21, temperature: 98 },
-    //  { name: 'Biplap', age: 22, temperature: 98 },
-    //  ])
-    // Output:
-    // It will return an object from the function. That object will have 4 lists named as A, B,
-    // C, D respectively . Think A, B , C, D as line names in front of the vaccine booth.
-    // A will have person with age 20-30 with temperature less than 100
-    // B will have person with age 31-40 with temperature less than 100
-    // C will have person with age 41-50 with temperature less than 100
-    // D will have any range of age with temperature greater than equal 100
-    // Each array will be sort by even ages people
-    // Sample:
-    // {
-    //  A: [
-    //  { name: 'Biplap', age: 22, temperature: 98 },
-    //  { name: 'sunil', age: 21, temperature: 98 }
-    //  ]
-    // ,
-    // B:
-    //  [ { name: 'Kabir', age: 36, temperature: 99 }, { name: 'Rahul', age: 37,
-    // temperature: 99 } ]
-    // ,
-    // C: [ { name: 'Paul', age: 42, temperature: 98 }, { name: 'Kat', age: 41,
-    // temperature: 98 } ]
-    // ,
-    // D: [ { name: 'Nayem', age: 50, temperature: 100 }, { name: 'Sabnaj', age: 51,
-    // temperature: 101 } ]
-    // }
-    // [ You have to provide us the github link ]
-
-
-    const vaxTrail = (dataInfo) => {
-        let sample = {
-            A: [],
-            B: [],
-            C: [],
-            D: []
-        }
-        console.log(dataInfo)
-        // for (data in dataInfo) {
-        //     console.log(data)
-        // }
-        // for(var i = 0; dataInfo.length; i++){
-        //     console.log(dataInfo[i])
-        //     return
-        // }
-
-    }
-
-
-    vaxTrail([
-        { name: "jayed", age: 23, temperature: 99 },
-        { name: "abdullah", age: 25, temperature: 101 },
-        { name: "abdurrahman", age: 27, temperature: 105 }
-    ])
     return (
         <div>
             <section className="container px-4 mx-auto">

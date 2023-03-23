@@ -2,15 +2,19 @@ import React, { useContext } from 'react';
 import { AuthProvider } from '../../../Context/AuthContext';
 import useAdmin from '../../../hooks/useAdmin';
 
-const UserRow = ({ data }) => {
+const UserRow = ({ data, handleCheckBoxChange, item }) => {
     const { user } = useContext(AuthProvider)
-    const { role, personalPhoto, name, email, _id, age, nid, drivingLicence , phone} = data
+    const { role, personalPhoto, name, email, _id, age, nid, drivingLicence, phone } = data
     const [isAdmin] = useAdmin(user?.email)
     return (
         <tr>
             <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                 <div className="inline-flex items-center gap-x-3">
-                    <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
+                    <input type="checkbox"
+                        className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"
+                        checked={item.action}
+                        onChange={(e) => handleCheckBoxChange(e, item._id)}
+                    />
 
                     <span>#{_id.slice(15, 25)}</span>
                 </div>
@@ -58,7 +62,7 @@ const UserRow = ({ data }) => {
             <td className="px-4 py-4 text-sm whitespace-nowrap">
                 <div className="flex items-center gap-x-6">
                     <p className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                       {phone}
+                        {phone}
                     </p>
 
                     <button className="text-blue-500 transition-colors duration-200 hover:text-indigo-500 focus:outline-none">
