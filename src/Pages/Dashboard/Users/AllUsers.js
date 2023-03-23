@@ -53,23 +53,7 @@ const AllUsers = () => {
 
    
 
-    // useEffect(() => {
-    //     axios.get('/api/items').then((res) => {
-    //         setItems(res.data);
-    //     });
-    // }, []);
-
-    // const handleCheckBoxChange = (e, id) => {
-    //     const checked = e.target.checked;
-    //     axios.put(`/api/items/${id}`, { action: checked })
-    //         .then((res) => {
-    //             setItems((prevItems) =>
-    //                 prevItems.map((item) => (item._id === id ? res.data : item))
-    //             );
-    //         });
-    // };
-
-    // user contect data  
+  
     const roleContain = [
         {
             name: "View All",

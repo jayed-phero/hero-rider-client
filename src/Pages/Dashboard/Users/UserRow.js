@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthProvider } from '../../../Context/AuthContext';
 import useAdmin from '../../../hooks/useAdmin';
 
-const UserRow = ({ data, handleCheckBoxChange, item }) => {
+const UserRow = ({ data }) => {
     const { user } = useContext(AuthProvider)
     const { role, personalPhoto, name, email, _id, age, nid, drivingLicence, phone } = data
     const [isAdmin] = useAdmin(user?.email)
@@ -12,8 +12,6 @@ const UserRow = ({ data, handleCheckBoxChange, item }) => {
                 <div className="inline-flex items-center gap-x-3">
                     <input type="checkbox"
                         className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"
-                        checked={item.action}
-                        onChange={(e) => handleCheckBoxChange(e, item._id)}
                     />
 
                     <span>#{_id.slice(15, 25)}</span>
