@@ -108,12 +108,14 @@ const LearnerRegistration = () => {
 
                                     <input type="text" className="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border-2 border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                                         {...register("name")}
+                                        required
                                     />
                                 </div>
                                 <div className='mt-4'>
                                     <label className="block text-sm text-gray-500 dark:text-gray-300" for="password">Email</label>
                                     <input type="email" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                         {...register("email")}
+                                        required
                                     />
                                 </div>
                                 <div className='flex items-center gap-5 mt-4 flex-col md:flex-row w-full'>
@@ -121,12 +123,14 @@ const LearnerRegistration = () => {
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Age</label>
                                         <input type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("age")}
+                                            required
                                         />
                                     </div>
                                     <div className='mt-4 md:mt-0 md:flex-1 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Phone</label>
                                         <input type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("phone")}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -142,6 +146,7 @@ const LearnerRegistration = () => {
 
                                     <input type="file" className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
                                         {...register("personalPhoto")}
+                                        required
                                     />
                                 </div>
 
@@ -150,12 +155,14 @@ const LearnerRegistration = () => {
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" for="emailAddress">Password</label>
                                         <input type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("password")}
+                                            required
                                         />
                                     </div>
                                     <div className='mt-4 md:mt-0 w-full'>
                                         <label className="block text-sm text-gray-500 dark:text-gray-300" >Confirm Password</label>
                                         <input type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border-2 border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                             {...register("confirmPassword")}
+                                            required
                                         />
                                     </div>
                                 </div>
